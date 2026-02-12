@@ -1,18 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>La meva web</title>
+  <title>Super Endevina el Número</title>
   <style>
     body {
+      background-color: #111;
+      color: white;
       font-family: Arial;
       text-align: center;
-      background-color: #f4f4f4;
-      margin-top: 50px;
+      margin-top: 80px;
+    }
+
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 5px;
+    }
+
+    button {
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h1>Hola 👋</h1>
-  <p>Aquesta és la meva web gratis amb GitHub Pages 😎</p>
+
+  <h1>🎯 Endevina el número EXTREM</h1>
+  <p>Estic pensant un número del 1 al 1.000.000...</p>
+
+  <input type="number" id="guess" min="1" max="1000000">
+  <button onclick="checkGuess()">Provar</button>
+
+  <p id="result"></p>
+  <p id="attempts"></p>
+
+  <script>
+    const secretNumber = Math.floor(Math.random() * 1000000) + 1;
+    let tries = 0;
+
+    function checkGuess() {
+      const userGuess = Number(document.getElementById("guess").value);
+      const result = document.getElementById("result");
+      const attempts = document.getElementById("attempts");
+
+      tries++;
+
+      if (!userGuess) {
+        result.textContent = "⚠️ Escriu un número!";
+        return;
+      }
+
+      if (userGuess === secretNumber) {
+        result.textContent = "🔥 CORRECTE!! Has guanyat!";
+        attempts.textContent = "Ho has aconseguit en " + tries + " intents.";
+      } else if (userGuess < secretNumber) {
+        result.textContent = "📉 Massa baix!";
+      } else {
+        result.textContent = "📈 Massa alt!";
+      }
+    }
+  </script>
+
 </body>
 </html>
